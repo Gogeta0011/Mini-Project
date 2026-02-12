@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: sfm-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sfm
+      MYSQL_USER: sfm_user
+      MYSQL_PASSWORD: sfm_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - sfm_mysql:/var/lib/mysql
+
+  localstack:
+    image: localstack/localstack:latest
+    container_name: sfm-localstack
+    environment:
+      - SERVICES=s3
+      - DEBUG=0
+      - AWS_DEFAULT_REGION=us-east-1
+    ports:
+      - "4566:4566"
+    volumes:
+      - "./.localstack:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+volumes:
+  sfm_mysql:
