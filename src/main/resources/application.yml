@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/sfm?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: sfm_user
+    password: sfm_pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+sfm:
+  jwt:
+    secret: "CHANGE_ME_TO_A_LONG_RANDOM_SECRET_32+_CHARS"
+    issuer: "sfm-local"
+    expirationMinutes: 240
+  s3:
+    bucket: "sfm-bucket"
+    region: "us-east-1"
+    endpoint: "http://localhost:4566"
+    accessKey: "test"
+    secretKey: "test"
